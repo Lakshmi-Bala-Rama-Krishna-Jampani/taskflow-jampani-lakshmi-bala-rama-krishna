@@ -1,0 +1,8 @@
+.env
+node_modules/
+dist/
+*.log
+.DS_Store
+backend/taskflow-api.exe
+backend/server
+frontend/dist/
