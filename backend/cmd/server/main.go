@@ -82,11 +82,8 @@ func main() {
 		httperr.WriteJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 	})
 
-	// EventSource can't send Authorization; ?token= and no request timeout on this route.
-	r.Group(func(r chi.Router) {
-		r.Use(middleware.Timeout(0))
-		r.Get("/projects/{id}/events", eh.Stream)
-	})
+	// SSE: token in query; no Timeout middleware (chi Timeout(0) expires the context immediately).
+	r.Get("/projects/{id}/events", eh.Stream)
 
 	r.Route("/auth", func(r chi.Router) {
 		r.Post("/register", ah.Register)

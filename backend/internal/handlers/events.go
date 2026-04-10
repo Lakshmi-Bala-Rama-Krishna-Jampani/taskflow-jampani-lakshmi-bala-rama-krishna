@@ -63,6 +63,7 @@ func (h *EventsHandler) Stream(w http.ResponseWriter, r *http.Request) {
 	defer cancel()
 
 	fmt.Fprintf(w, ": connected\n\n")
+	fmt.Fprintf(w, "data: %s\n\n", `{"type":"sse_connected"}`)
 	flusher.Flush()
 
 	for {
